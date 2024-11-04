@@ -118,8 +118,24 @@ class mainModel
                 <a class="page-link" ><i class="fa-solid fa-angles-left"></i></a></li>';
         }else{
             $tabla.='<li class="page-item"><a class="page-link" href="'.$url.'1/"><i class="fas fa-angles-left"></i></a></li>
-                <li class="page-item"><a class="page-link" href="'.$url.($pagina-1).'/">Anterior</a></li>';
+            <li class="page-item"><a class="page-link" href="'.$url.($pagina-1).'/">Anterior</a></li>';
         }
+
+        $ci=0;
+        for($i=$pagina; $i<=$Npagina; $i++){
+            if($ci>=$botones){
+                break;
+            }
+
+            if($pagina==$i){
+                $tabla.='<li class="page-item"><a class="page-link active" href="'.$url.$i.'/">'.$i.'<i class="fas fa-angles-left"></i></a></li>';
+            }else{
+                $tabla.='<li class="page-item"><a class="page-link" href="'.$url.$i.'/">'.$i.'<i class="fas fa-angles-left"></i></a></li>';
+            }
+
+            $ci++;
+        }
+
 
         if($pagina==$Npagina){
             $tabla.='<li class="page-item disabled"><a class="page-link" ><i class="fa-solid fa-angles-right"></i></a></li>';
