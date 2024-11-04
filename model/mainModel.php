@@ -10,8 +10,8 @@ class mainModel
 {
 
     /*----- Funcion para conectar a la BD ----- */
-    protected static function conectar()
-    {
+        protected static function conectar()
+        {
         $conexion = new PDO(SGBD, USER, PASSWORD);
         $conexion->exec("SET CHARACTER SET utf8");
         return $conexion;
@@ -20,7 +20,7 @@ class mainModel
     /*----- Funcion ejecutar consultas simples ----- */
     protected static function ejecutar_consulta_simple($consulta)
     {
-        $sql = self::conectar()->prepare($consulta);
+        $sql = self::conectar()->prepare($consulta) ;
         $sql->execute();
         return $sql;
     }
@@ -106,6 +106,30 @@ class mainModel
         }else{
             return true;
         }
+    }
+
+    /*------------Funcion paginador de tablas------------- */
+    protected static function paginador_tablas($pagina,$Npagina,$url,$botones){
+        $tabla='<nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">';
+
+        if($pagina==1){
+            $tabla.='<li class="page-item disabled">
+                <a class="page-link" ><i class="fa-solid fa-angles-left"></i></a></li>';
+        }else{
+            $tabla.='<li class="page-item"><a class="page-link" href="'.$url.'1/"><i class="fas fa-angles-left"></i></a></li>
+                <li class="page-item"><a class="page-link" href="'.$url.($pagina-1).'/">Anterior</a></li>';
+        }
+
+        if($pagina==$Npagina){
+            $tabla.='<li class="page-item disabled"><a class="page-link" ><i class="fa-solid fa-angles-right"></i></a></li>';
+        }else{
+            $tabla.=
+            '<li class="page-item"><a class="page-link" href="'.$url.($pagina+1).'/">Siguiente</a></li>
+            <li class="page-item"><a class="page-link" href="'.$url.$Npagina.'/"><i class="fa-solid fa-angles-right"></i></i></a></li>';
+        }
+        $tabla.='</ul> </nav>';
+        return$tabla;
     }
 
 }
