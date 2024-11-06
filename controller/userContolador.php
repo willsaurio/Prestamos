@@ -6,5 +6,8 @@
     }
 
     class userControlador extends userModel{
-        
+        /*------------controlador agregar usuario----------- */
+        public function agregar_usuario_controlador(){
+
+        }
     }
